@@ -1,0 +1,83 @@
+class PassengerCheckIn extends Thread {
+    int delay;
+
+    PassengerCheckIn(int delay) {
+        this.delay = delay;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(Thread.currentThread().getName() + "- Started");
+            sleep(delay);
+            System.out.println(Thread.currentThread().getName() + "- Completed");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class BaggageProcessing extends Thread {
+    int delay;
+
+    BaggageProcessing(int delay) {
+        this.delay = delay;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(Thread.currentThread().getName() + "- Started");
+            sleep(delay);
+            System.out.println(Thread.currentThread().getName() + "- Completed");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Security extends Thread {
+    int delay;
+
+    Security(int delay) {
+        this.delay = delay;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(Thread.currentThread().getName() + "- Started");
+            sleep(delay);
+            System.out.println(Thread.currentThread().getName() + "- Completed");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Main1 {
+    public static void main(String[] args) {
+
+        PassengerCheckIn t1 = new PassengerCheckIn(500);
+        BaggageProcessing t2 = new BaggageProcessing(700);
+        Security t3 = new Security(800);
+
+        t1.setName("Passenger Check-In");
+        t2.setName("Baggage Processing");
+        t3.setName("Security");
+
+        t1.start();
+        t2.start();
+        t3.start();
+        try{
+            t1.join();
+            t2.join();
+            t3.join();
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("AI201 is ready to board");
+
+    }
+}
